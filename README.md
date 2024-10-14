@@ -9,6 +9,7 @@
 
 - GNU Make
 - G++
+- SFML `sudo apt install libsfml-dev`
 
 ## Compiling targets
 | Command      | Description                                                                |

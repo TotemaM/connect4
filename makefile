@@ -31,7 +31,7 @@ OUT := prog
 SRC := $(shell find $(SRC_DIR) -type f -name *.cpp)
 OBJ := $(patsubst $(SRC_DIR)/%.cpp, $(BLD_DIR)/%.o, $(SRC))
 INC := -I $(SRC_DIR)
-LIB :=
+LIB := -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio
 DEP := $(OBJ:.o=.d)
 
 prog: $(OBJ)
