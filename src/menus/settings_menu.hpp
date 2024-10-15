@@ -5,10 +5,9 @@
 
 class SettingsMenu: public Menu {
     Type type = SETTINGS;
-    Button back_button = Button(sf::Vector2f(200, 50), sf::Vector2f(300, 200), "back");
+    Button back_button = Button("Back", 300, 300, 100, 50);
 public:
     using Menu::Menu;
-    ~SettingsMenu() {}
     Type getType() const override { return type; }
     Type handle_event(sf::Event event) override {
         switch (event.type) {

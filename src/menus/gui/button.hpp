@@ -5,20 +5,23 @@
 #include <memory>
 #include <string>
 using namespace std;
+#include <iostream>
 
 class Button: public sf::Drawable {
     public:
-    Button(sf::Vector2f size, sf::Vector2f position, string txt): rectangle(size) {
-        rectangle.setFillColor(sf::Color::White);
-        rectangle.setOutlineColor(sf::Color::Black);
-        rectangle.setOutlineThickness(1);
-        rectangle.setPosition(position);
-        font.loadFromFile("font/8bit.ttf");
-        text.setFont(font);
+    Button(string txt, int x, int y, int width, int height, string font_path = "font/8bit.ttf", sf::Color fill_color = sf::Color::White, sf::Color outline_color = sf::Color::Black): rectangle(sf::Vector2f(width, height)) {
         text.setString(txt);
-        text.setCharacterSize(24); // TODO set text size based on button size
+        text.setCharacterSize(32-(txt.length()*1.5));
+        font.loadFromFile(font_path);
+        text.setFont(font);
+        text.setPosition(x-this->text.getGlobalBounds().width/2, y-this->text.getGlobalBounds().height/2);
         text.setFillColor(sf::Color::Black);
-        text.setPosition(position.x + 10, position.y + 10); // TODO set better text position
+        rectangle.setFillColor(fill_color);
+        rectangle.setOutlineColor(outline_color);
+        rectangle.setOutlineThickness(1);
+        rectangle.setSize(sf::Vector2f(width, height));
+        rectangle.setPosition(x-width/2, y-height/2);
+        text.setPosition((x-width/2)+(width/2-text.getGlobalBounds().width/2), (y-height/2)+(height/2-text.getGlobalBounds().height/2)+text.getCharacterSize()*0.18); // TODO set better text position
     }
     // Handling visual change when hovering
     void hover(int x, int y) {
@@ -33,7 +36,7 @@ class Button: public sf::Drawable {
         target.draw(text, states);
     }
     private:
-    sf::Font font;
     sf::Text text;
+    sf::Font font;
     sf::RectangleShape rectangle;
 };

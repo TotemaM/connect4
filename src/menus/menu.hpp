@@ -12,8 +12,9 @@ public:
     virtual ~Menu() {}
     enum Type {
         MAIN,
+        SETTINGS,
         GAME_SETTINGS,
-        SETTINGS
+        GAME
     };
     virtual Type getType() const = 0;
     virtual Type handle_event(sf::Event event) = 0;

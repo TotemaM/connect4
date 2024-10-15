@@ -9,7 +9,7 @@
 using namespace std;
 
 class App {
-    shared_ptr<sf::RenderWindow> window = make_shared<sf::RenderWindow>(sf::VideoMode(800, 600), "Connect 4");
+    shared_ptr<sf::RenderWindow> window = make_shared<sf::RenderWindow>(sf::VideoMode(1280, 720), "Connect 4");
     unique_ptr<Menu> current_menu = make_unique<MainMenu>(window);
     Menu::Type change_menu = Menu::Type::MAIN;
     public:
