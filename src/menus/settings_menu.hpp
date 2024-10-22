@@ -1,29 +1,35 @@
 #pragma once
 
 #include "menu.hpp"
-#include "gui/button.hpp"
+#include "menus/gui/button.hpp"
+#include "settings.hpp"
+
+#include <SFML/Graphics.hpp>
+
+#include <memory>
+#include <vector>
+using namespace std;
 
 class SettingsMenu: public Menu {
-    Type type = SETTINGS;
-    Button back_button = Button("Back", 300, 300, 100, 50);
+    Type const type = SETTINGS;
+    shared_ptr<SettingsManager> settings;
+    Text title = Text("Settings", window->getSize().x/2, window->getSize().y/2-100, 50, Anchor::Type::C, "font/8bit.ttf", sf::Color::White);
+    Button back_button = Button("Back", window->getSize().x/2, window->getSize().y/2, 200, 50, Anchor::Type::C);
+    Button apply_button = Button("Apply", window->getSize().x/2, window->getSize().y/2+100, 200, 50, Anchor::Type::C);
+    vector<sf::Drawable*> items = { &title, &back_button, &apply_button };
 public:
-    using Menu::Menu;
+    SettingsMenu(shared_ptr<sf::RenderWindow> window, shared_ptr<SettingsManager> settings): Menu(window), settings(settings) {}
     Type getType() const override { return type; }
     Type handle_event(sf::Event event) override {
-        switch (event.type) {
-            case sf::Event::MouseMoved: back_button.hover(event.mouseMove.x, event.mouseMove.y); break;
-            case sf::Event::MouseButtonPressed: if (back_button.isHovered(event.mouseButton.x, event.mouseButton.y)) { return Menu::MAIN; } break;
-            case sf::Event::KeyPressed: {
-                switch(event.key.code) {
-                    case sf::Keyboard::Escape: return Menu::MAIN;
-                    default: break;
-                }
-            }
-            default: break;
+        if (event.type == sf::Event::MouseButtonPressed) {
+            if (back_button.isHovered(event.mouseButton.x, event.mouseButton.y)) { return Menu::MAIN; }
+            else if (apply_button.isHovered(event.mouseButton.x, event.mouseButton.y)) { /* TODO */ }
+        }
+        else if (event.type == sf::Event::MouseMoved) {
+            back_button.hover(event.mouseMove.x, event.mouseMove.y);
+            apply_button.hover(event.mouseMove.x, event.mouseMove.y);
         }
         return type;
     }
-    void draw() const override {
-        window->draw(back_button);
-    }
+    void draw() const override { for (auto item: items) { window->draw(*item); } }
 };

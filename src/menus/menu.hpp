@@ -11,6 +11,7 @@ public:
     Menu(shared_ptr<sf::RenderWindow> window): window(window) {}
     virtual ~Menu() {}
     enum Type {
+        NONE,
         MAIN,
         SETTINGS,
         GAME_SETTINGS,

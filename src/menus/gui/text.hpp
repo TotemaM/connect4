@@ -1,21 +1,25 @@
+#pragma once
+
+#include "menus/gui/anchor.hpp"
+
 #include <SFML/Graphics.hpp>
 
 #include <string>
 using namespace std;
 
 class Text : public sf::Drawable {
+    Anchor anchor;
     sf::Text text;
     sf::Font font;
 public:
-    Text(string txt, int x, int y, int size = 30, string font_path = "font/8bit.ttf", sf::Color color = sf::Color::White) {
+    Text(string txt, int x, int y, int size, Anchor::Type anchor_type = Anchor::Type::NW, string font_path = "font/8bit.ttf", sf::Color color = sf::Color::Black) {
         text.setString(txt);
-        text.setCharacterSize(size);
         font.loadFromFile(font_path);
         text.setFont(font);
-        text.setPosition(x-this->text.getGlobalBounds().width/2, y-this->text.getGlobalBounds().height/2);
+        text.setCharacterSize(size);
+        anchor.attach(x, y, text.getGlobalBounds().width, text.getGlobalBounds().height, anchor_type);
+        text.setPosition(anchor.getX(), anchor.getY()+size*0.18);
         text.setFillColor(color);
     }
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const override {
-        target.draw(text, states);
-    }
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override { target.draw(text, states); }
 };
