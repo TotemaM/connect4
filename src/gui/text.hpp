@@ -1,6 +1,6 @@
 #pragma once
 
-#include "menus/gui/anchor.hpp"
+#include "gui/anchor.hpp"
 
 #include <SFML/Graphics.hpp>
 

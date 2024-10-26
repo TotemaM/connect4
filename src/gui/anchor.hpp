@@ -4,8 +4,8 @@ class Anchor {
 public:
     enum Type { N, NE, E, SE, S, SW, W, NW, C };
     Anchor() = default;
-    void attach(int x, int y, int width, int height, Type anchor) {
-        switch (anchor) {
+    void attach(int x, int y, unsigned int width, unsigned int height, Type type) {
+        switch (type) {
             case N: this->x = x - width/2; this->y = y; break;
             case NE: this->x = x - width; this->y = y; break;
             case E: this->x = x - width; this->y = y - height/2; break;

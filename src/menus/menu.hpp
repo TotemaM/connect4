@@ -2,24 +2,24 @@
 
 #include <SFML/Graphics.hpp>
 
-#include <memory>
 #include <vector>
 using namespace std;
 
-class Menu {
+class Menu : public sf::Drawable {
 public:
-    Menu(shared_ptr<sf::RenderWindow> window): window(window) {}
+    Menu() = default;
     virtual ~Menu() {}
     enum Type {
         NONE,
         MAIN,
-        SETTINGS,
-        GAME_SETTINGS,
         GAME
     };
-    virtual Type getType() const = 0;
+    Type getType() const { return type; }
     virtual Type handle_event(sf::Event event) = 0;
-    virtual void draw() const = 0;
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override {
+        for (auto item: items) { target.draw(*item, states); }
+    }
 protected:
-    shared_ptr<sf::RenderWindow> window;
+    vector<sf::Drawable*> items;
+    Type type = NONE;
 };

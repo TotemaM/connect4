@@ -1,2 +1,8 @@
+# Build and output components
 build
 out
+# VSCode
+.vscode
+# Krita
+*.kra-autosave.kra
+*.png~

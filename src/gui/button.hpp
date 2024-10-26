@@ -1,7 +1,7 @@
 #pragma once
 
-#include "menus/gui/anchor.hpp"
-#include "menus/gui/text.hpp"
+#include "gui/anchor.hpp"
+#include "gui/text.hpp"
 
 #include <SFML/Graphics.hpp>
 
