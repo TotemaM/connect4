@@ -13,7 +13,7 @@
 using namespace std;
 
 class GameMenu: public Menu {
-    Game game = Game(Player::CUSTOM, Player::CUSTOM);
+    Game game = Game(Player::USER, Player::USER);
     Image background = Image("img/game_menu.png", 0, 0);
 public:
     GameMenu() {
