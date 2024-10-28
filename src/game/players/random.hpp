@@ -1,3 +1,4 @@
+#pragma once
 #include "game/players/player.hpp"
 #include "game/rng.hpp"
 
