@@ -31,7 +31,7 @@ public:
     /* !!! Check if the play is valid before calling this function */
     Coordinate play(const short unsigned int &column, const Color &color);
     bool checkVictory();
-    bool isBoardFull() const { return current_round == MAX_ROUND; }
+    bool isBoardFull() const;
     vector<short unsigned int> getValidMoves() const;
     Color getWinner() const;
 };

@@ -24,7 +24,7 @@ void Board::draw(sf::RenderTarget& target, sf::RenderStates states) const {
         }
     }
 }
-void Board::display(const short unsigned int playerID = 2, const Coordinate* lastMove = nullptr) const {
+void Board::display(const short unsigned int playerID, const Coordinate* lastMove) const {
     //system("clear");
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
