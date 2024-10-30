@@ -1,4 +1,9 @@
+// Reference header
 #include "app.hpp"
+// File inclusions
+#include "menus/home.hpp"
+#include "menus/game.hpp"
+#include "menus/config.hpp"
 
 void App::run() {
     while(window.isOpen()) {
@@ -10,9 +15,10 @@ void App::run() {
         }
         if (change_menu != current_menu->getType()) {
             switch (change_menu) {
-                case Menu::MAIN: current_menu = make_unique<MainMenu>(); break;
-                case Menu::GAME: current_menu = make_unique<GameMenu>(); break;
-                default: current_menu = make_unique<MainMenu>(); break;
+                case Menu::HOME: current_menu = make_unique<HomeMenu>(); break;
+                case Menu::CONFIG: current_menu = make_unique<GameConfigMenu>(&game_config); break;
+                case Menu::GAME: current_menu = make_unique<GameMenu>(game_config); break;
+                default: break;
             }
         }
         window.clear();

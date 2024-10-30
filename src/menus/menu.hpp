@@ -9,7 +9,7 @@ class Menu : public sf::Drawable {
 public:
     Menu() = default;
     virtual ~Menu() {}
-    enum Type { NONE, MAIN, GAME };
+    enum Type { NONE, HOME, CONFIG, GAME };
     Type getType() const;
     virtual Type handle_event(sf::Event event) = 0;
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

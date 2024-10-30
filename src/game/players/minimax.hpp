@@ -62,7 +62,7 @@ class Minimax : public Player {
         return 0;
     }
 public:
-    using Player::Player;
+    Minimax(const Color color): Player(color) { type = Type::MINIMAX; }
     short unsigned int play(Board board) override {
         return minimax(board, DEPTH, -2147483648, 2147483647, true)[0];
     }

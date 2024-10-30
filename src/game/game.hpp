@@ -1,17 +1,16 @@
 #pragma once
-
+// File inclusions
 #include "game/board.hpp"
-#include "game/players/user.hpp"
-#include "game/players/random.hpp"
-#include "game/players/minimax.hpp"
-#include "game/players/custom.hpp"
 #include "gui/text.hpp"
+#include "game/gameconfig.hpp"
+// Standard libraries
 #include <atomic>
 
 class Game : public sf::Drawable {
 public:
     enum Winner { YELLOW = 0, RED = 1, DRAW = 2, NONE = 4};
-    Game(Player::Type p1, Player::Type p2);
+    Game() = default;
+    Game(GameConfig config);
     void start();
     // Returning true if move is valid
     bool userPlay(short unsigned int column);

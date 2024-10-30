@@ -5,7 +5,7 @@
 class Player {
     Color color;
 public:
-    enum Type { NONE, USER, RANDOM, MINIMAX, CUSTOM };
+    enum Type { NONE, USER, RANDOM, MINIMAX, MINIMAXPP, CUSTOM };
     Player(const Color color) : color(color) {}
     virtual ~Player() {}
     Color getColor() const { return color; }

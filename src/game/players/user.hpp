@@ -10,9 +10,7 @@ class User : public Player {
         } catch (const invalid_argument &e) { return false; }
     }
 public:
-    User(const Color color): Player(color) {
-        type = Type::USER;
-    }
+    User(const Color color): Player(color) { type = Type::USER; }
     short unsigned int play(const Board board [[maybe_unused]]) override {
         string move;
         cin >> move;

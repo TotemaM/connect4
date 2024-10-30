@@ -1,19 +1,50 @@
 // Reference header
 #include "game/game.hpp"
+// File inclusions
+#include "game/players/user.hpp"
+#include "game/players/random.hpp"
+#include "game/players/minimax.hpp"
+#include "game/players/minimaxpp.hpp"
+#include "game/players/custom.hpp"
+// Standard libraries
+#include <iostream>
+using namespace std;
 
-Game::Game(Player::Type p1, Player::Type p2) {
+Game::Game(GameConfig config) {
     board = make_unique<Board>();
-    switch (p1) {
+    switch (config.player1) {
+        case Player::Type::NONE: {
+            players[0] = make_unique<User>(Color(Color::Type::YELLOW));
+            cout << "Player type uninitialised, defaulting to user" << endl;
+            break;
+        }
+        case Player::Type::USER: players[0] = make_unique<User>(Color(Color::Type::YELLOW)); break;
         case Player::Type::RANDOM: players[0] = make_unique<Random>(Color(Color::Type::YELLOW)); break;
         case Player::Type::MINIMAX: players[0] = make_unique<Minimax>(Color(Color::Type::YELLOW)); break;
+        case Player::Type::MINIMAXPP: players[0] = make_unique<MinimaxPP>(Color(Color::Type::YELLOW)); break;
         case Player::Type::CUSTOM: players[0] = make_unique<Custom>(Color(Color::Type::YELLOW)); break;
-        default: players[0] = make_unique<User>(Color(Color::Type::YELLOW)); break;
+        default: {
+            players[0] = make_unique<User>(Color(Color::Type::YELLOW));
+            cout << "Unknown player type, defaulting to user" << endl;
+            break;
+        }
     }
-    switch (p2) {
+    switch (config.player2) {
+        case Player::Type::NONE: {
+            players[1] = make_unique<User>(Color(Color::Type::RED));
+            cout << "Player type uninitialised, defaulting to user" << endl;
+            break;
+        }
+        case Player::Type::USER: players[1] = make_unique<User>(Color(Color::Type::RED)); break;
         case Player::Type::RANDOM: players[1] = make_unique<Random>(Color(Color::Type::RED)); break;
         case Player::Type::MINIMAX: players[1] = make_unique<Minimax>(Color(Color::Type::RED)); break;
+        case Player::Type::MINIMAXPP: players[1] = make_unique<MinimaxPP>(Color(Color::Type::RED)); break;
         case Player::Type::CUSTOM: players[1] = make_unique<Custom>(Color(Color::Type::RED)); break;
-        default: players[1] = make_unique<User>(Color(Color::Type::RED)); break;
+        default: {
+            players[1] = make_unique<User>(Color(Color::Type::RED));
+            cout << "Unknown player type, defaulting to user" << endl;
+            break;
+        }
     }
 }
 void Game::start() {
